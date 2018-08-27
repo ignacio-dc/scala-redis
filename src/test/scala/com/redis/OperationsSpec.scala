@@ -112,6 +112,16 @@ class OperationsSpec extends FunSpec
     }
   }
 
+  describe("multipleExists") {
+    it("should give") {
+      r.set("anshin-1", "debasish")
+      r.set("anshin-2", "maulindu")
+      r.multipleExists("anshin-1", "anshin-2").get should equal(2)
+      r.multipleExists("anshin-1", "anshin-2", "anshin-3").get should equal(2)
+      r.multipleExists("anshin-3").get should equal(0)
+    }
+  }
+
   describe("del") {
     it("should give") {
       r.set("anshin-1", "debasish")

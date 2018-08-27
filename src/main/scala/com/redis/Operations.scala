@@ -85,6 +85,11 @@ trait Operations { self: Redis =>
   def exists(key: Any)(implicit format: Format): Boolean =
     send("EXISTS", List(key))(asBoolean)
 
+  // EXISTS (key1 key2 ..)
+  // test if multiple keys exists.
+  def multipleExists(key: Any, keys: Any*)(implicit format: Format): Option[Long] =
+    send("EXISTS", key :: keys.toList)(asLong)
+
   // DELETE (key1 key2 ..)
   // deletes the specified keys.
   def del(key: Any, keys: Any*)(implicit format: Format): Option[Long] =
